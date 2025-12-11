@@ -1,0 +1,14 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}Recipe Not Found{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="text-align: center; padding: 4rem; background: white; border-radius: 15px; margin-top: 2rem;">
+        <h1 style="font-size: 4rem; color: #667eea;">404</h1>
+        <h2>Recipe Not Found</h2>
+        <p style="margin-top: 1rem; color: #666;">Sorry, we couldn't find the recipe you're looking for.</p>
+        <a href="{% url 'recipes:home' %}" class="btn" style="margin-top: 2rem;">Go Back Home</a>
+    </div>
+</div>
+{% endblock %} 

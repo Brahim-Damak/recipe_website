@@ -1,0 +1,43 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}Search Results - Recipe Website{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="margin-bottom: 1rem;">
+        {% if query %}
+        Search Results for "{{ query }}"
+        {% else %}
+        Search Recipes
+        {% endif %}
+    </h1>
+
+    {% if recipes %}
+    <p style="color: #666; margin-bottom: 2rem;">Found {{ recipes|length }} recipe(s)</p>
+    <div class="recipe-grid">
+        {% for recipe in recipes %}
+        <a href="{% url 'recipes:detail' recipe.meal_id %}" class="recipe-card">
+            <img src="{{ recipe.thumbnail }}" alt="{{ recipe.name }}">
+            <div class="recipe-card-content">
+                <h3>{{ recipe.name }}</h3>
+                <div class="recipe-meta">
+                    <span class="recipe-badge">{{ recipe.category }}</span>
+                    <span class="recipe-badge">{{ recipe.area }}</span>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% elif query %}
+    <div style="text-align: center; padding: 3rem; background: white; border-radius: 15px;">
+        <h2>No recipes found for "{{ query }}"</h2>
+        <p style="margin-top: 1rem; color: #666;">Try searching for something else</p>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 3rem; background: white; border-radius: 15px;">
+        <h2>Search for Recipes</h2>
+        <p style="margin-top: 1rem; color: #666;">Enter a recipe name in the search box above</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

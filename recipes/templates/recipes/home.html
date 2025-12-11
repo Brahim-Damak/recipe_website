@@ -1,0 +1,44 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}Home - Recipe Website{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1>Discover Amazing Recipes</h1>
+        <p>Explore thousands of delicious recipes from around the world</p>
+    </div>
+</div>
+
+<div class="container">
+    <h2 style="margin-bottom: 1rem;">Featured Recipes</h2>
+    <div class="recipe-grid">
+        {% for recipe in recipes %}
+        <a href="{% url 'recipes:detail' recipe.meal_id %}" class="recipe-card">
+            <img src="{{ recipe.thumbnail }}" alt="{{ recipe.name }}">
+            <div class="recipe-card-content">
+                <h3>{{ recipe.name }}</h3>
+                <div class="recipe-meta">
+                    <span class="recipe-badge">{{ recipe.category }}</span>
+                    <span class="recipe-badge">{{ recipe.area }}</span>
+                </div>
+            </div>
+        </a>
+        {% empty %}
+        <p>No recipes available at the moment.</p>
+        {% endfor %}
+    </div>
+
+    {% if categories %}
+    <h2 style="margin-top: 3rem; margin-bottom: 1rem;">Browse by Category</h2>
+    <div class="category-grid">
+        {% for category in categories %}
+        <a href="{% url 'recipes:category_recipes' category.strCategory %}" class="category-card">
+            <img src="{{ category.strCategoryThumb }}" alt="{{ category.strCategory }}">
+            <h3>{{ category.strCategory }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

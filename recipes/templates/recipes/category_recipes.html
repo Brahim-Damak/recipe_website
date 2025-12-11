@@ -1,0 +1,31 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ category }} Recipes - Recipe Website{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="margin-bottom: 2rem;">{{ category }} Recipes</h1>
+
+    {% if recipes %}
+    <div class="recipe-grid">
+        {% for recipe in recipes %}
+        <a href="{% url 'recipes:detail' recipe.meal_id %}" class="recipe-card">
+            <img src="{{ recipe.thumbnail }}" alt="{{ recipe.name }}">
+            <div class="recipe-card-content">
+                <h3>{{ recipe.name }}</h3>
+                <div class="recipe-meta">
+                    <span class="recipe-badge">{{ recipe.category }}</span>
+                    <span class="recipe-badge">{{ recipe.area }}</span>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 3rem; background: white; border-radius: 15px;">
+        <h2>No recipes found in this category</h2>
+        <a href="{% url 'recipes:categories' %}" class="btn" style="margin-top: 1rem;">Browse Other Categories</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 
